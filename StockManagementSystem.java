@@ -112,7 +112,35 @@ public class StockManagementSystem {
 
         Scanner input = new Scanner(System.in);
 
-        
+        System.out.print("Please enter the username to verify it's you : ");
+        String currentUsername = input.next();
+
+        if (currentUsername.equals(usernameArray[0])) {
+            System.out.println("Hey "+currentUsername);
+            System.out.print("Enter your current password : ");
+            String currentPassword = input.next();
+            
+            if (currentPassword.equals(passwordArray[0])) {
+                System.out.print("Enter your new password : ");
+                String newPassword = input.next();
+                passwordArray[0] = newPassword;
+                System.out.print("\n\nYour password has been changed successfully. Do you want to go home page (y/n): ");
+                String option = input.next();
+
+                if (option.equals("y")) {
+                    clearConsole();
+                    gotoHomepage(usernameArray, passwordArray);
+                }else{
+                    System.exit(0);
+                }
+            } else {
+                System.out.println("incorrect password. try again.\n");
+                changeCredentials(usernameArray, passwordArray);
+            }
+        } else {
+                System.out.println("Invalid username. try again.\n");
+                changeCredentials(usernameArray, passwordArray);
+        }
     }
 
     // supplierManage method
