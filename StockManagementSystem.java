@@ -174,12 +174,15 @@ public class StockManagementSystem {
 
         switch (option) {
             case 1:
+                clearConsole();
                 changeCredentials(usernameArray, passwordArray);
                 break;
             case 2:
+                clearConsole();
                 supplierManage();
                 break;
             case 3:
+                clearConsole();
                 stockManage();
                 break;
             case 4:
