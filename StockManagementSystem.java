@@ -147,9 +147,63 @@ public class StockManagementSystem {
 
     public static void supplierManage(){
 
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("+");
+        for (int i = 0; i < 50; i++) {
+            System.out.print("-");
+        }
+        System.out.print("+\n");
+
+        System.out.println("|\t\t    SUPPLIER MANAGE\t\t   |");
+
+        System.out.print("+");
+        for (int i = 0; i < 50; i++) {
+            System.out.print("-");
+        }
+        System.out.print("+\n\n");
+
+        System.out.println("[1] Add Supplier\t\t\t[2] Update Supplier");
+        System.out.println("[3] Delete Supplier\t\t\t[4] View Suppliers");
+        System.out.println("[5] Search Supplier\t\t\t[6] Home Page");
+
+        System.out.print("\n\nEnter an option to continue > ");
+        int option = input.nextInt();
+
+        switch (option) {
+            case 1:
+                addSuplier();
+                break;
+            case 2:
+             //   updateSuplier();
+                break;
+            case 3:
+              //  deleteSuplier();
+                break;
+            case 4:
+             //   viewSuplier();
+                break;
+            case 5:
+               // searchSuplier();
+                break;
+            case 6:
+                clearConsole();
+                gotoHomepage(null, null);
+                break;
+            default:
+                clearConsole();
+                System.out.println("\n Invalid Option !! try again.");
+                supplierManage();
+                break;
+        }
     }
 
     // stockManage method
+
+    private static void addSuplier() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'addSuplier'");
+    }
 
     public static void stockManage() {
         
@@ -182,6 +236,7 @@ public class StockManagementSystem {
 
         switch (option) {
             case 1:
+                // changeCredentials method eke thawa poddak hadanna thiyeno
                 clearConsole();
                 changeCredentials(usernameArray, passwordArray);
                 break;
