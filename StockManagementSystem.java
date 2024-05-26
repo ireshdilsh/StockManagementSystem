@@ -252,8 +252,22 @@ public class StockManagementSystem {
     }
 
     private static void updateSupplier(Scanner input) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateSupplier'");
+        System.out.println();
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("|                               UPDATE SUPPLIER                              |");
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println();
+        
+        boolean flag = true;
+
+        while (flag) {
+            System.out.print("Supplier ID : ");
+            String id = input.next();
+
+            if (containsSuppliertId(id) == false) {
+                System.out.println("can't find supplier id. try again.");
+            }
+        }
     }
 
     private static void addSupplier(Scanner input) {
