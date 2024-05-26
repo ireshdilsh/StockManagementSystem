@@ -262,25 +262,42 @@ public class StockManagementSystem {
         System.out.println("|                                ADD SUPPLIER                                |");
         System.out.println("------------------------------------------------------------------------------");
         System.out.println();
-       
-        while (true) {
+        
+        boolean flag = true;
+        while (flag) {
             System.out.print("Enter Supplier ID: ");
-            String id = input.next().trim();
-            if (getSupplierIndexById(id) != -1) {
-                System.out.println("Supplier ID already exists. Please enter a different ID.");
-                continue;
-            }
-            System.out.print("Enter Supplier Name: ");
-            String name = input.nextLine().trim();
-            suppliers[supplierCount][0] = id;
-            suppliers[supplierCount][1] = name;
-            supplierCount++;
-            System.out.println("Supplier added successfully.");
+            String id = input.next();
+            
+            if (containsSuppliertId(id)) {
+                System.out.println("already exsists. try another supplier id.\n");
+
+            }else{
+              
+                System.out.print("Enter supplier name : ");
+                String name = input.next();
     
-            System.out.print("Do you want to add another supplier? (Y/N): ");
-            String choice = input.nextLine().trim();
-            if (!choice.equalsIgnoreCase("Y")) {
-                break;
+                suppliers[supplierCount][0] = id;
+                suppliers[supplierCount][1] = name;
+                supplierCount++;
+    
+                System.out.print("added successfully! Do you want to add another supplier (y/n)? ");
+                String choice = input.next().toLowerCase();
+                System.out.println();
+                boolean isRun = true;
+    
+                while (isRun) {
+                    if (choice.equals("y")) {
+                       isRun = false;
+                    }else if(choice.equals("n")){
+                        isRun = true;
+                        clearConsole();
+                        supplierManage(input);
+                    }else{
+                        System.out.print("Invalid Option. try again. (y/n) : ");
+                        choice = input.next(); 
+                    }
+                    System.out.println();
+                }
             }
         }
     }
@@ -306,12 +323,12 @@ public class StockManagementSystem {
         }
     }
 
-    private static int getSupplierIndexById(String id) {
+    private static boolean containsSuppliertId(String supplierID) {
         for (int i = 0; i < supplierCount; i++) {
-            if (suppliers[i][0].equals(id)) {
-                return i;
+            if (suppliers[i][0] != null && suppliers[i][0].equals(supplierID)) {
+                return true;
             }
         }
-        return -1;
+        return false;
     }
 }
