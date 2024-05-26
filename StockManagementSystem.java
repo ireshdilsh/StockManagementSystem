@@ -1,10 +1,294 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class StockManagementSystem {
 
-    // clearConsole method
+    static Scanner input = new Scanner(System.in);
+    static String[] usernameArray = new String[1];
+    static String[] passwordArray = new String[1];
+    static final int MAX_SUPPLIERS = 100;
+    static String[][] suppliers = new String[MAX_SUPPLIERS][2]; // index 0 == id and 1 == name
+    static int supplierCount = 0;    
     
-    public final static void clearConsole() {
+    public static void main(String[] args) {
+        registerPage(input);
+    }
+
+    private static void registerPage(Scanner input) {
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("|                                 REGISTER PAGE                              |");
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println();
+
+        System.out.print("Create username : ");
+        usernameArray[0] = input.next();
+
+        System.out.print("Create password : ");
+        passwordArray[0] = input.next();
+
+        loginPage(input);
+
+    }
+
+    private static void loginPage(Scanner input) {
+
+        clearConsole();
+
+        System.out.println();
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("|                                 LOGIN PAGE                                 |");
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println();
+
+        System.out.print("Enter username : ");
+        String username = input.next();
+
+       
+        boolean flag = true;
+
+        while (flag) {
+           if (usernameArray[0].equals(username)) {
+           
+            System.out.print("Enter password : ");
+            String password = input.next();    
+           
+            if (passwordArray[0].equals(password)) {
+                flag = false;
+                clearConsole();
+                homePage(input);
+              }else{
+                System.out.println("password is incorrect. try again");
+              }
+
+           }else{
+             System.out.println("username is incorrect. try again");
+             System.out.print("Enter username : ");
+             username = input.next();
+           }
+        }
+    }
+    private static void homePage(Scanner input){
+        System.out.println();
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("|                    WECOME TO IJSE STOCK MANAGEMENT SYSTEM                  |");
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println();
+
+        System.out.print("[1]  Change the Credentials\t\t");
+        System.out.println("[2]  Supplier Manage");
+        System.out.print("[3]  Stock Manage\t\t\t");
+        System.out.println("[4]  Log Out");
+        System.out.println("[5]  Exit the System");
+
+        boolean flag = true;
+        
+        System.out.print("\nEnter an option to continue > ");
+        String choice = input.next();
+
+        while (flag) {
+            if (choice.equals("1")) {
+                flag = false;
+                clearConsole();
+                changeTheCredentials(input);
+            }else if(choice.equals("2")){
+                flag = false;
+                clearConsole();
+                supplierManage(input);
+            }else if(choice.equals("3")){
+                flag = false;
+                clearConsole();
+                stockManage(input);
+            }else if(choice.equals("4")){
+                flag = false;
+                loginPage(input);
+            }else if(choice.equals("5")){
+                flag = false;
+                clearConsole();
+                System.out.println("Bye bye !!!!.");
+                System.exit(0);
+            }else{
+                System.out.println("Invalid Option. try again."); 
+                System.out.print("\nEnter an option to continue > ");
+                choice = input.next();
+            }
+        }
+    }
+
+    private static void changeTheCredentials(Scanner input){
+       
+        System.out.println();
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("|                             CREDENTIAL MANAGE                              |");
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println();
+
+        boolean flag = true;
+
+        System.out.print("Please enter the username to verify its' you : ");
+        String username = input.next();
+
+        while (flag) {
+            boolean run = true;
+            
+            while (run) {
+               
+                if (usernameArray[0].equals(username)) {
+                   
+                    System.out.println("Hey "+username);
+                    System.out.print("Enter your current password : ");
+                    String curPassword = input.next();
+                    boolean isCheck = true;
+
+                        while (isCheck) {
+                            if (passwordArray[0].equals(curPassword)) {
+                          
+                                System.out.print("Enter your new password : ");
+                                String newPassword = input.next();
+                                passwordArray[0] = newPassword;
+                                isCheck = false;
+                                run = false;
+                               
+                            }else{
+                                System.out.print("incorrect password. try again!\n");
+                                System.out.print("\nEnter your current password : ");
+                                curPassword = input.next();
+                            }
+                        } 
+                }else{
+                    System.out.println("invalid username. try again!");
+                    System.out.print("\nPlease enter the username to verify its' you : ");
+                    username = input.next();
+                }
+            }
+            System.out.print("Password change successfully! Do you want to go home page (y/n) : ");
+            String option = input.next().toLowerCase();
+
+           boolean isYes = true;
+
+           while (isYes) {
+             if (option.equals("y")) {
+                isYes = false;
+                clearConsole();
+                homePage(input);
+            }else if(option.equals("n")){
+              flag = true;
+            }else{
+                System.out.print("Invalid option. try again. (y/n): ");
+                option = input.next().toLowerCase();
+            }
+           }
+        }
+    }
+    
+    ///////////////////////////////     SUPPLIER MANAGEMENT     ///////////////////////////////      
+    
+    private static void supplierManage(Scanner input){
+        
+        System.out.println();
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("|                              SUPPLIER MANAGE                               |");
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println();
+
+        System.out.print("[1]  Add Supplier\t\t");
+        System.out.println("[2]  Update Supplier");
+        System.out.print("[3]  Delete Supplier\t\t");
+        System.out.println("[4]  View Suppliers");
+        System.out.print("[5]  Search Supplier\t\t");
+        System.out.println("[6]  Home Page");
+
+        System.out.print("\nEnter an option to continue > ");
+        String choice = input.next();
+
+        boolean flag = true;
+
+        while (flag) {
+
+            if (choice.equals("1")) {
+                flag = false;
+                clearConsole();
+                addSupplier(input);
+            }else if(choice.equals("2")){
+                flag = false;
+                clearConsole();
+                updateSupplier(input);
+            }else if(choice.equals("3")){
+                flag = false;
+                clearConsole();
+                deleteSupplier(input);
+            }else if(choice.equals("4")){
+                flag = false;
+                clearConsole();
+                viewSupplier();
+            }else if(choice.equals("5")){
+                flag = false;
+                clearConsole();
+                serarchSupplier(input);
+            }else if(choice.equals("6")){
+                flag = false;
+                clearConsole();
+                homePage(input);
+            }else{
+                System.out.println("Invalid option.try again !\n");
+                System.out.print("Enter an option to continue > ");
+                choice = input.next();
+            }
+        }
+
+    }
+
+    private static void serarchSupplier(Scanner input) {
+       
+    }
+
+    private static void viewSupplier() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'viewSupplier'");
+    }
+
+    private static void deleteSupplier(Scanner input) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'deleteSupplier'");
+    }
+
+    private static void updateSupplier(Scanner input) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateSupplier'");
+    }
+
+    private static void addSupplier(Scanner input) {
+        System.out.println();
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("|                                ADD SUPPLIER                                |");
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println();
+        while (true) {
+            System.out.print("Enter Supplier ID: ");
+            String id = input.next().trim();
+            if (getSupplierIndexById(id) != -1) {
+                System.out.println("Supplier ID already exists. Please enter a different ID.");
+                continue;
+            }
+            System.out.print("Enter Supplier Name: ");
+            String name = input.nextLine().trim();
+            suppliers[supplierCount][0] = id;
+            suppliers[supplierCount][1] = name;
+            supplierCount++;
+            System.out.println("Supplier added successfully.");
+    
+            System.out.print("Do you want to add another supplier? (Y/N): ");
+            String choice = input.nextLine().trim();
+            if (!choice.equalsIgnoreCase("Y")) {
+                break;
+            }
+        }
+    }
+
+    private static void stockManage(Scanner input){
+        System.out.println("Stocks");
+    }
+    
+    private final static void clearConsole() {
         final String os = System.getProperty("os.name");
         try {
             if (os.equals("Linux")) {
@@ -21,251 +305,12 @@ public class StockManagementSystem {
         }
     }
 
-    // register page
-
-    public static void registerPage() {
-
-        Scanner input = new Scanner(System.in);
-
-        System.out.print("+");
-        for (int i = 0; i < 50; i++) {
-            System.out.print("-");
-        }
-        System.out.print("+\n");
-
-        System.out.println("|\t\t   REGISTER PAGE \t\t   |");
-
-        System.out.print("+");
-        for (int i = 0; i < 50; i++) {
-            System.out.print("-");
-        }
-        System.out.print("+\n\n");
-
-        final String[] usernameArray = new String[1];
-        final String[] passwordArray = new String[1];
-
-        System.out.print("Create Username : ");
-        String useString = input.next();
-        usernameArray[0] = useString;
-
-        System.out.print("Create Password : ");
-        String passString = input.next();
-        passwordArray[0] = passString;
-
-        clearConsole();
-
-        gotoLoginPage(usernameArray, passwordArray);
-
-    }
-
-    public static void gotoLoginPage(String[] usernameArray, String[] passwordArray) {
-
-        System.out.print("+");
-        for (int i = 0; i < 50; i++) {
-            System.out.print("-");
-        }
-        System.out.print("+\n");
-
-        System.out.println("|\t\t     LOGIN PAGE \t\t   |");
-
-        System.out.print("+");
-        for (int i = 0; i < 50; i++) {
-            System.out.print("-");
-        }
-        System.out.print("+\n\n");
-
-        Scanner input = new Scanner(System.in);
-
-        System.out.print("Username : ");
-        String username = input.next();
-
-        System.out.print("Password : ");
-        String password = input.next();
-
-        if (username.equals(usernameArray[0]) && password.equals(passwordArray[0])) {
-            clearConsole();
-            gotoHomepage(usernameArray, passwordArray);
-
-        } else {
-            System.out.println("Your username or password incorrect.Please try again.");
-            gotoLoginPage(usernameArray, passwordArray);
-        }
-    }
-
-    // changeCredentials method
-
-    public static void changeCredentials(String[]usernameArray,String[]passwordArray) {
-        
-        System.out.print("+");
-        for (int i = 0; i < 50; i++) {
-            System.out.print("-");
-        }
-        System.out.print("+\n");
-
-        System.out.println("|\t\tCREDENTIAL MANAGE\t\t   |");
-
-        System.out.print("+");
-        for (int i = 0; i < 50; i++) {
-            System.out.print("-");
-        }
-        System.out.print("+\n\n");
-
-        Scanner input = new Scanner(System.in);
-
-        System.out.print("Please enter the username to verify it's you : ");
-        String currentUsername = input.next();
-
-        if (currentUsername.equals(usernameArray[0])) {
-            System.out.println("Hey "+currentUsername);
-            System.out.print("Enter your current password : ");
-            String currentPassword = input.next();
-            
-            if (currentPassword.equals(passwordArray[0])) {
-                System.out.print("Enter your new password : ");
-                String newPassword = input.next();
-                passwordArray[0] = newPassword;
-                System.out.print("\n\nYour password has been changed successfully. Do you want to go home page (y/n): ");
-                String option = input.next();
-
-                if (option.equals("y")) {
-                    clearConsole();
-                    gotoHomepage(usernameArray, passwordArray);
-                }else{
-                    System.exit(0);
-                }
-            } else {
-                System.out.println("incorrect password. try again.\n");
-                changeCredentials(usernameArray, passwordArray);
+    private static int getSupplierIndexById(String id) {
+        for (int i = 0; i < supplierCount; i++) {
+            if (suppliers[i][0].equals(id)) {
+                return i;
             }
-        } else {
-                System.out.println("Invalid username. try again.\n");
-                changeCredentials(usernameArray, passwordArray);
         }
-    }
-
-    // supplierManage method
-
-    public static void supplierManage(){
-
-        Scanner input = new Scanner(System.in);
-
-        System.out.print("+");
-        for (int i = 0; i < 50; i++) {
-            System.out.print("-");
-        }
-        System.out.print("+\n");
-
-        System.out.println("|\t\t    SUPPLIER MANAGE\t\t   |");
-
-        System.out.print("+");
-        for (int i = 0; i < 50; i++) {
-            System.out.print("-");
-        }
-        System.out.print("+\n\n");
-
-        System.out.println("[1] Add Supplier\t\t\t[2] Update Supplier");
-        System.out.println("[3] Delete Supplier\t\t\t[4] View Suppliers");
-        System.out.println("[5] Search Supplier\t\t\t[6] Home Page");
-
-        System.out.print("\n\nEnter an option to continue > ");
-        int option = input.nextInt();
-
-        switch (option) {
-            case 1:
-                addSuplier();
-                break;
-            case 2:
-             //   updateSuplier();
-                break;
-            case 3:
-              //  deleteSuplier();
-                break;
-            case 4:
-             //   viewSuplier();
-                break;
-            case 5:
-               // searchSuplier();
-                break;
-            case 6:
-                clearConsole();
-                gotoHomepage(null, null);
-                break;
-            default:
-                clearConsole();
-                System.out.println("\n Invalid Option !! try again.");
-                supplierManage();
-                break;
-        }
-    }
-
-    // stockManage method
-
-    private static void addSuplier() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addSuplier'");
-    }
-
-    public static void stockManage() {
-        
-    }
-
-    public static void gotoHomepage(String[] usernameArray, String[] passwordArray) {
-
-        Scanner input = new Scanner(System.in);
-
-        System.out.print("+");
-        for (int i = 0; i < 50; i++) {
-            System.out.print("-");
-        }
-        System.out.print("+\n");
-
-        System.out.println("|\tWELCOME TO IJSE STOCK MANAGEMENT SYSTEM    |");
-
-        System.out.print("+");
-        for (int i = 0; i < 50; i++) {
-            System.out.print("-");
-        }
-        System.out.print("+\n\n");
-
-        System.out.println("[1] Change the Credentials\t\t\t[2] Supplier Manage");
-        System.out.println("[3] Stock Management      \t\t\t[4] Log out");
-        System.out.println("[5] Exit the System");
-
-        System.out.print("\nEnter an option to continue > ");
-        int option = input.nextInt();
-
-        switch (option) {
-            case 1:
-                // changeCredentials method eke thawa poddak hadanna thiyeno
-                clearConsole();
-                changeCredentials(usernameArray, passwordArray);
-                break;
-            case 2:
-                clearConsole();
-                supplierManage();
-                break;
-            case 3:
-                clearConsole();
-                stockManage();
-                break;
-            case 4:
-                clearConsole();
-                gotoLoginPage(usernameArray, passwordArray);
-                break;
-            case 5:
-                clearConsole();
-                System.out.println("See you !!!!");
-                System.exit(0);
-                break;
-            default:
-                clearConsole();
-                System.out.println("Invalid option. please try again.\n");
-                gotoHomepage(usernameArray, passwordArray);
-                break;
-        }
-    }
-
-    public static void main(String[] args) {
-        registerPage();
+        return -1;
     }
 }
