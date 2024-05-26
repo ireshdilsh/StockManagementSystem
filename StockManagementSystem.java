@@ -262,6 +262,7 @@ public class StockManagementSystem {
         System.out.println("|                                ADD SUPPLIER                                |");
         System.out.println("------------------------------------------------------------------------------");
         System.out.println();
+       
         while (true) {
             System.out.print("Enter Supplier ID: ");
             String id = input.next().trim();
