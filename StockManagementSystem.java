@@ -266,6 +266,22 @@ public class StockManagementSystem {
 
             if (containsSuppliertId(id) == false) {
                 System.out.println("can't find supplier id. try again.");
+            }else{
+                for (int i = 0; i < suppliers.length; i++) {
+                    if (containsSuppliertId(id)) {
+                        System.out.println(suppliers[i][1]);
+                        break;
+                    }
+                }
+
+                for (int i = 0; i < suppliers.length; i++) {
+                    System.out.println();
+                    boolean isRun = true;
+                    System.out.print("Enter the new supplier name : ");
+                    String name = input.next();
+                    suppliers[i][1] = name;
+                    break;
+                }
             }
         }
     }
