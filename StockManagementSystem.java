@@ -258,32 +258,52 @@ public class StockManagementSystem {
         System.out.println("------------------------------------------------------------------------------");
         System.out.println();
         
-        boolean flag = true;
+        String supplierId;
+        boolean continueSearch = true;
 
-        while (flag) {
+        while (continueSearch) {
             System.out.print("Supplier ID : ");
-            String id = input.next();
+            supplierId = input.next();
 
-            if (containsSuppliertId(id) == false) {
-                System.out.println("can't find supplier id. try again.");
-            }else{
-                for (int i = 0; i < suppliers.length; i++) {
-                    if (containsSuppliertId(id)) {
-                        System.out.println(suppliers[i][1]);
-                        break;
-                    }
-                }
+            int supplierIndex = -1;
 
-                for (int i = 0; i < suppliers.length; i++) {
-                    System.out.println();
-                    boolean isRun = true;
-                    System.out.print("Enter the new supplier name : ");
-                    String name = input.next();
-                    suppliers[i][1] = name;
+            for (int i = 0; i < supplierCount; i++) {
+                if (suppliers[i][0] != null && suppliers[i][0].equals(supplierId)) {
+                    supplierIndex = i;
                     break;
                 }
             }
+
+            if (supplierIndex == -1) {
+                System.out.println("Can't find supplier id. try again!");
+            }else{
+
+                String suppName = suppliers[supplierIndex][1];
+                System.out.println("Supplier Name : "+suppName);
+                System.out.print("\nEnter the new supplier name : ");
+                String newSuppName = input.next();
+                suppliers[supplierIndex][1] = newSuppName;
+
+                System.out.print("Updated successfully.Do you want to update another supplier (y/n)? : ");
+                String choice = input.next().toLowerCase();
+                System.out.println();
+                boolean isRun = true;
+
+                while (isRun) {
+                    if (choice.equals("y")) {
+                        isRun = false;
+                    }else if(choice.equals("n")){
+                        clearConsole();
+                        supplierManage(input);
+                    }else{
+                        System.out.print("Invalid Option! try again. (y/n) : ");
+                        choice = input.next().toLowerCase();
+                    }
+                }
+            }
         }
+
+        
     }
 
     private static void addSupplier(Scanner input) {
