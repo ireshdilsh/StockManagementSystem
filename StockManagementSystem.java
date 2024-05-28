@@ -336,12 +336,9 @@ public class StockManagementSystem {
                 if (option.equals("y")) {
 
                     for (int i = supplierIndex; i < supplierCount - 1; i++) {
-                       // suppliers[i][0] = suppliers[i + 1][0];
                          suppliers[i] = suppliers[i+1];
-                       // suppliers[i][1] = suppliers[i - 1][1];
                     }
                     suppliers[supplierCount -1] = new String[2];
-                    //suppliers[supplierIndex][1] = null;
                     supplierCount--;
 
                     System.out.print("supplier deleted successfully! Do you want to delete another supplier (y/n)? : ");
