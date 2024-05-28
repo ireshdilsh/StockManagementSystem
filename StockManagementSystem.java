@@ -239,6 +239,56 @@ public class StockManagementSystem {
 
     private static void serarchSupplier(Scanner input) {
        
+        System.out.println();
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("|                               UPDATE SUPPLIER                              |");
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println();
+        
+        String supplierId;
+        boolean continueSearch = true;
+
+        while (continueSearch) {
+            System.out.print("Supplier ID : ");
+            supplierId = input.next();
+
+            int supplierIndex = -1;
+
+            for (int i = 0; i < supplierCount; i++) {
+                if (suppliers[i][0] != null && suppliers[i][0].equals(supplierId)) {
+                    supplierIndex = i;
+                    break;
+                }
+            }
+
+            if (supplierIndex == -1) {
+                System.out.println("Can't find supplier id. try again!\n");
+            }else{
+
+                String suppName = suppliers[supplierIndex][1];
+                System.out.println("Supplier Name : "+suppName);
+            }
+
+            System.out.print("Do you want to find another supplier (y/n)? : ");
+            String choice = input.next().toLowerCase();
+
+            System.out.println();
+
+            boolean isRun = true;
+
+            while (isRun) {
+                if (choice.equals("y")) {
+                    isRun = false;
+                }else if(choice.equals("n")){
+                    clearConsole();
+                    supplierManage(input);
+                }else{
+                    System.out.print("Invalid Option! try agian. (y/n) : ");
+                    choice = input.next().toLowerCase();
+                    System.out.println("");
+                }
+            }
+        }
     }
 
     private static void viewSupplier() {
@@ -353,7 +403,14 @@ public class StockManagementSystem {
     }
 
     private static void stockManage(Scanner input){
-        System.out.println("Stocks");
+       
+        System.out.println();
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("|                                STOCK MANAGE                                |");
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println();
+
+        
     }
     
     private final static void clearConsole() {
