@@ -241,7 +241,7 @@ public class StockManagementSystem {
        
         System.out.println();
         System.out.println("------------------------------------------------------------------------------");
-        System.out.println("|                               UPDATE SUPPLIER                              |");
+        System.out.println("|                               SEARCH SUPPLIER                              |");
         System.out.println("------------------------------------------------------------------------------");
         System.out.println();
         
@@ -297,8 +297,14 @@ public class StockManagementSystem {
     }
 
     private static void deleteSupplier(Scanner input) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteSupplier'");
+        
+        System.out.println();
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("|                               DELETE SUPPLIER                              |");
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println();
+
+
     }
 
     private static void updateSupplier(Scanner input) {
@@ -402,6 +408,7 @@ public class StockManagementSystem {
         }
     }
 
+    /////////////////////////////       Stock Management Methods        /////////////////////////////////////
     private static void stockManage(Scanner input){
        
         System.out.println();
