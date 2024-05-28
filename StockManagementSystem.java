@@ -469,8 +469,7 @@ public class StockManagementSystem {
         }
     }
 
-    ///////////////////////////// Stock Management Methods
-    ///////////////////////////// /////////////////////////////////////
+    /////////////////////////////   Stock Management Methods   /////////////////////////////////////
     private static void stockManage(Scanner input) {
 
         System.out.println();
