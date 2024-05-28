@@ -8,8 +8,8 @@ public class StockManagementSystem {
     static String[] passwordArray = new String[1];
     static final int MAX_SUPPLIERS = 100;
     static String[][] suppliers = new String[MAX_SUPPLIERS][2]; // index 0 == id and 1 == name
-    static int supplierCount = 0;    
-    
+    static int supplierCount = 0;
+
     public static void main(String[] args) {
         registerPage(input);
     }
@@ -43,31 +43,31 @@ public class StockManagementSystem {
         System.out.print("Enter username : ");
         String username = input.next();
 
-       
         boolean flag = true;
 
         while (flag) {
-           if (usernameArray[0].equals(username)) {
-           
-            System.out.print("Enter password : ");
-            String password = input.next();    
-           
-            if (passwordArray[0].equals(password)) {
-                flag = false;
-                clearConsole();
-                homePage(input);
-              }else{
-                System.out.println("password is incorrect. try again");
-              }
+            if (usernameArray[0].equals(username)) {
 
-           }else{
-             System.out.println("username is incorrect. try again");
-             System.out.print("Enter username : ");
-             username = input.next();
-           }
+                System.out.print("Enter password : ");
+                String password = input.next();
+
+                if (passwordArray[0].equals(password)) {
+                    flag = false;
+                    clearConsole();
+                    homePage(input);
+                } else {
+                    System.out.println("password is incorrect. try again");
+                }
+
+            } else {
+                System.out.println("username is incorrect. try again");
+                System.out.print("Enter username : ");
+                username = input.next();
+            }
         }
     }
-    private static void homePage(Scanner input){
+
+    private static void homePage(Scanner input) {
         System.out.println();
         System.out.println("------------------------------------------------------------------------------");
         System.out.println("|                    WECOME TO IJSE STOCK MANAGEMENT SYSTEM                  |");
@@ -81,7 +81,7 @@ public class StockManagementSystem {
         System.out.println("[5]  Exit the System");
 
         boolean flag = true;
-        
+
         System.out.print("\nEnter an option to continue > ");
         String choice = input.next();
 
@@ -90,32 +90,34 @@ public class StockManagementSystem {
                 flag = false;
                 clearConsole();
                 changeTheCredentials(input);
-            }else if(choice.equals("2")){
+            } else if (choice.equals("2")) {
                 flag = false;
                 clearConsole();
                 supplierManage(input);
-            }else if(choice.equals("3")){
+            } else if (choice.equals("3")) {
                 flag = false;
                 clearConsole();
                 stockManage(input);
-            }else if(choice.equals("4")){
+            } else if (choice.equals("4")) {
                 flag = false;
                 loginPage(input);
-            }else if(choice.equals("5")){
+            } else if (choice.equals("5")) {
                 flag = false;
                 clearConsole();
                 System.out.println("Bye bye !!!!.");
                 System.exit(0);
-            }else{
-                System.out.println("Invalid Option. try again."); 
-                System.out.print("\nEnter an option to continue > ");
+            } else {
+                System.out.println("Invalid Option. try again.");
+              //  homePage(input);
+                 System.out.print("\nEnter an option to continue > ");
                 choice = input.next();
             }
         }
+
     }
 
-    private static void changeTheCredentials(Scanner input){
-       
+    private static void changeTheCredentials(Scanner input) {
+
         System.out.println();
         System.out.println("------------------------------------------------------------------------------");
         System.out.println("|                             CREDENTIAL MANAGE                              |");
@@ -129,32 +131,32 @@ public class StockManagementSystem {
 
         while (flag) {
             boolean run = true;
-            
+
             while (run) {
-               
+
                 if (usernameArray[0].equals(username)) {
-                   
-                    System.out.println("Hey "+username);
+
+                    System.out.println("Hey " + username);
                     System.out.print("Enter your current password : ");
                     String curPassword = input.next();
                     boolean isCheck = true;
 
-                        while (isCheck) {
-                            if (passwordArray[0].equals(curPassword)) {
-                          
-                                System.out.print("Enter your new password : ");
-                                String newPassword = input.next();
-                                passwordArray[0] = newPassword;
-                                isCheck = false;
-                                run = false;
-                               
-                            }else{
-                                System.out.print("incorrect password. try again!\n");
-                                System.out.print("\nEnter your current password : ");
-                                curPassword = input.next();
-                            }
-                        } 
-                }else{
+                    while (isCheck) {
+                        if (passwordArray[0].equals(curPassword)) {
+
+                            System.out.print("Enter your new password : ");
+                            String newPassword = input.next();
+                            passwordArray[0] = newPassword;
+                            isCheck = false;
+                            run = false;
+
+                        } else {
+                            System.out.print("incorrect password. try again!\n");
+                            System.out.print("\nEnter your current password : ");
+                            curPassword = input.next();
+                        }
+                    }
+                } else {
                     System.out.println("invalid username. try again!");
                     System.out.print("\nPlease enter the username to verify its' you : ");
                     username = input.next();
@@ -163,27 +165,28 @@ public class StockManagementSystem {
             System.out.print("Password change successfully! Do you want to go home page (y/n) : ");
             String option = input.next().toLowerCase();
 
-           boolean isYes = true;
+            boolean isYes = true;
 
-           while (isYes) {
-             if (option.equals("y")) {
-                isYes = false;
-                clearConsole();
-                homePage(input);
-            }else if(option.equals("n")){
-              flag = true;
-            }else{
-                System.out.print("Invalid option. try again. (y/n): ");
-                option = input.next().toLowerCase();
+            while (isYes) {
+                if (option.equals("y")) {
+                    isYes = false;
+                    clearConsole();
+                    homePage(input);
+                } else if (option.equals("n")) {
+                    flag = true;
+                } else {
+                    System.out.print("Invalid option. try again. (y/n): ");
+                    option = input.next().toLowerCase();
+                }
             }
-           }
         }
     }
-    
-    ///////////////////////////////     SUPPLIER MANAGEMENT     ///////////////////////////////      
-    
-    private static void supplierManage(Scanner input){
-        
+
+    /////////////////////////////// SUPPLIER MANAGEMENT
+    /////////////////////////////// ///////////////////////////////
+
+    private static void supplierManage(Scanner input) {
+
         System.out.println();
         System.out.println("------------------------------------------------------------------------------");
         System.out.println("|                              SUPPLIER MANAGE                               |");
@@ -208,27 +211,27 @@ public class StockManagementSystem {
                 flag = false;
                 clearConsole();
                 addSupplier(input);
-            }else if(choice.equals("2")){
+            } else if (choice.equals("2")) {
                 flag = false;
                 clearConsole();
                 updateSupplier(input);
-            }else if(choice.equals("3")){
+            } else if (choice.equals("3")) {
                 flag = false;
                 clearConsole();
                 deleteSupplier(input);
-            }else if(choice.equals("4")){
+            } else if (choice.equals("4")) {
                 flag = false;
                 clearConsole();
                 viewSupplier();
-            }else if(choice.equals("5")){
+            } else if (choice.equals("5")) {
                 flag = false;
                 clearConsole();
                 serarchSupplier(input);
-            }else if(choice.equals("6")){
+            } else if (choice.equals("6")) {
                 flag = false;
                 clearConsole();
                 homePage(input);
-            }else{
+            } else {
                 System.out.println("Invalid option.try again !\n");
                 System.out.print("Enter an option to continue > ");
                 choice = input.next();
@@ -238,13 +241,13 @@ public class StockManagementSystem {
     }
 
     private static void serarchSupplier(Scanner input) {
-       
+
         System.out.println();
         System.out.println("------------------------------------------------------------------------------");
         System.out.println("|                               SEARCH SUPPLIER                              |");
         System.out.println("------------------------------------------------------------------------------");
         System.out.println();
-        
+
         String supplierId;
         boolean continueSearch = true;
 
@@ -263,10 +266,10 @@ public class StockManagementSystem {
 
             if (supplierIndex == -1) {
                 System.out.println("Can't find supplier id. try again!\n");
-            }else{
+            } else {
 
                 String suppName = suppliers[supplierIndex][1];
-                System.out.println("Supplier Name : "+suppName);
+                System.out.println("Supplier Name : " + suppName);
             }
 
             System.out.print("Do you want to find another supplier (y/n)? : ");
@@ -279,10 +282,10 @@ public class StockManagementSystem {
             while (isRun) {
                 if (choice.equals("y")) {
                     isRun = false;
-                }else if(choice.equals("n")){
+                } else if (choice.equals("n")) {
                     clearConsole();
                     supplierManage(input);
-                }else{
+                } else {
                     System.out.print("Invalid Option! try agian. (y/n) : ");
                     choice = input.next().toLowerCase();
                     System.out.println("");
@@ -297,13 +300,75 @@ public class StockManagementSystem {
     }
 
     private static void deleteSupplier(Scanner input) {
-        
+
         System.out.println();
         System.out.println("------------------------------------------------------------------------------");
         System.out.println("|                               DELETE SUPPLIER                              |");
         System.out.println("------------------------------------------------------------------------------");
         System.out.println();
 
+        String supplierId;
+        boolean continueSearch = true;
+        String choice;
+        while (continueSearch) {
+
+            System.out.print("Suuplier ID : ");
+            supplierId = input.next();
+
+            int supplierIndex = -1;
+
+            for (int i = 0; i < supplierCount; i++) {
+                if (suppliers[i][0] != null && suppliers[i][0].equals(supplierId)) {
+                    supplierIndex = i;
+                    break;
+                }
+            }
+
+            if (supplierIndex == -1) {
+
+                System.out.println("Can't find supplier id. try again.\n");
+
+            } else {
+
+                System.out.print("Do you want to delete this supplier (y/n)? : ");
+                String option = input.next().toLowerCase();
+
+                if (option.equals("y")) {
+
+                    for (int i = supplierIndex; i < supplierCount - 1; i++) {
+                       // suppliers[i][0] = suppliers[i + 1][0];
+                         suppliers[i] = suppliers[i+1];
+                       // suppliers[i][1] = suppliers[i - 1][1];
+                    }
+                    suppliers[supplierCount -1] = new String[2];
+                    //suppliers[supplierIndex][1] = null;
+                    supplierCount--;
+
+                    System.out.print("supplier deleted successfully! Do you want to delete another supplier (y/n)? : ");
+                    choice = input.next().toLowerCase();
+                    System.out.println();
+                    boolean isYes = true;
+
+                    while (isYes) {
+                        if (choice.equals("y")) {
+                            isYes = false;
+                        } else if (choice.equals("n")) {
+                            clearConsole();
+                            supplierManage(input);
+                        } else {
+                            System.out.print("Invalid Option! try again (y/n) : ");
+                            choice = input.next().toLowerCase();
+                        }
+                    }
+                } else if (option.equals("n")) {
+                    clearConsole();
+                    supplierManage(input);
+                } else {
+                    System.out.println("Invalid Option! try again. (y/n) : ");
+                    option = input.next().toLowerCase();
+                }
+            }
+        }
 
     }
 
@@ -313,7 +378,7 @@ public class StockManagementSystem {
         System.out.println("|                               UPDATE SUPPLIER                              |");
         System.out.println("------------------------------------------------------------------------------");
         System.out.println();
-        
+
         String supplierId;
         boolean continueSearch = true;
 
@@ -332,10 +397,10 @@ public class StockManagementSystem {
 
             if (supplierIndex == -1) {
                 System.out.println("Can't find supplier id. try again!");
-            }else{
+            } else {
 
                 String suppName = suppliers[supplierIndex][1];
-                System.out.println("Supplier Name : "+suppName);
+                System.out.println("Supplier Name : " + suppName);
                 System.out.print("\nEnter the new supplier name : ");
                 String newSuppName = input.next();
                 suppliers[supplierIndex][1] = newSuppName;
@@ -348,10 +413,10 @@ public class StockManagementSystem {
                 while (isRun) {
                     if (choice.equals("y")) {
                         isRun = false;
-                    }else if(choice.equals("n")){
+                    } else if (choice.equals("n")) {
                         clearConsole();
                         supplierManage(input);
-                    }else{
+                    } else {
                         System.out.print("Invalid Option! try again. (y/n) : ");
                         choice = input.next().toLowerCase();
                     }
@@ -359,7 +424,6 @@ public class StockManagementSystem {
             }
         }
 
-        
     }
 
     private static void addSupplier(Scanner input) {
@@ -368,39 +432,39 @@ public class StockManagementSystem {
         System.out.println("|                                ADD SUPPLIER                                |");
         System.out.println("------------------------------------------------------------------------------");
         System.out.println();
-        
+
         boolean flag = true;
         while (flag) {
             System.out.print("Enter Supplier ID: ");
             String id = input.next();
-            
+
             if (containsSuppliertId(id)) {
                 System.out.println("already exsists. try another supplier id.\n");
 
-            }else{
-              
+            } else {
+
                 System.out.print("Enter supplier name : ");
                 String name = input.next();
-    
+
                 suppliers[supplierCount][0] = id;
                 suppliers[supplierCount][1] = name;
                 supplierCount++;
-    
+
                 System.out.print("added successfully! Do you want to add another supplier (y/n)? ");
                 String choice = input.next().toLowerCase();
                 System.out.println();
                 boolean isRun = true;
-    
+
                 while (isRun) {
                     if (choice.equals("y")) {
-                       isRun = false;
-                    }else if(choice.equals("n")){
+                        isRun = false;
+                    } else if (choice.equals("n")) {
                         isRun = true;
                         clearConsole();
                         supplierManage(input);
-                    }else{
+                    } else {
                         System.out.print("Invalid Option. try again. (y/n) : ");
-                        choice = input.next(); 
+                        choice = input.next();
                     }
                     System.out.println();
                 }
@@ -408,18 +472,53 @@ public class StockManagementSystem {
         }
     }
 
-    /////////////////////////////       Stock Management Methods        /////////////////////////////////////
-    private static void stockManage(Scanner input){
-       
+    ///////////////////////////// Stock Management Methods
+    ///////////////////////////// /////////////////////////////////////
+    private static void stockManage(Scanner input) {
+
         System.out.println();
         System.out.println("------------------------------------------------------------------------------");
         System.out.println("|                                STOCK MANAGE                                |");
         System.out.println("------------------------------------------------------------------------------");
         System.out.println();
 
-        
+        System.out.print("[1] Manage Item Categories\t\t");
+        System.out.println("[2] Add Item");
+        System.out.print("[3] Get Items Supplier Wise\t\t");
+        System.out.println("[4] View Items");
+        System.out.print("[5] Rank Items Per Unit Price\t\t");
+        System.out.println("[6] Home Page");
+
+        System.out.print("\nEnter an option to continue > ");
+        String option = input.next();
+
+        switch (option) {
+            case "1":
+                System.out.println("category");
+                break;
+            case "2":
+                System.out.println("add item");
+                break;
+            case "3":
+                System.out.println("get Item");
+                break;
+            case "4":
+                System.out.println("view item");
+                break;
+            case "5":
+                System.out.println("rank item");
+                break;
+            case "6":
+                clearConsole();
+                supplierManage(input);
+                break;
+            default:
+                System.out.print("Invalid Option! try again.(y/n) : ");
+                option = input.next();
+                break;
+        }
     }
-    
+
     private final static void clearConsole() {
         final String os = System.getProperty("os.name");
         try {
