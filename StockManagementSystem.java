@@ -594,7 +594,7 @@ public class StockManagementSystem {
                 case 3:
                     isCheck = false;
                     clearConsole();
-                    System.out.println("get item");
+                    getItemWiswSupplier(input);
                     break;
 
                 case 4:
@@ -963,5 +963,71 @@ public class StockManagementSystem {
         }
         System.out.println("Items ranked by unit price in ascending order:");
         viewItems();
+    }
+
+     private static void getItemWiswSupplier(Scanner input) {
+
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("|                               SEARCH SUPPLIER                              |");
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println();
+
+        boolean isCheck = true;
+
+        while (isCheck) {
+
+            System.out.print("Enter Supplier ID : ");
+            String supplierID = input.next();
+            int index = getSupplierIndexById(supplierID);
+
+            if (index == -1) {
+                System.out.println("can't find supplier. try again!\n");
+                continue;
+            }
+
+            System.out.println("Supplier Name : " + suppliers[index][1] + "\n");
+
+            System.out.println("---------------------------------------------------------------------------");
+            System.out.println("|  ITEM CODE  |  DISCRIPTION  |  UNIT PRICE  |  QTY ON HAND  |  CATEGORY  |");
+            System.out.println("---------------------------------------------------------------------------");
+
+            for (int i = 0; i < itemCount; i++) {
+
+                if (items[i][1].equals(supplierID)) {
+
+                    System.out.print("|     "+items[i][0]+"     |     "+items[i][2]+"     |     "+items[i][3]+"     |     "+items[i][4]+"  |     "+items[i][5]+"     |  \n");
+                   
+                }
+
+            }
+
+            System.out.println("---------------------------------------------------------------------------");
+
+            boolean isRun = true;
+            System.out.print("\nsearch successfully! Do you want to another search (y/n)? : ");
+            String option = input.next().toLowerCase();
+            System.out.println();
+            while (isRun) {
+
+                switch (option) {
+
+                    case "y":
+                        isRun = false;
+                        break;
+
+                    case "n":
+                        isRun = false;
+                        isCheck = false;
+                        clearConsole();
+                        stockManage(input);
+                        break;
+
+                    default:
+                        System.out.print("\ninvalid option.try again! (y/n) : ");
+                        option = input.next().toLowerCase();
+                }
+            }
+
+        }
     }
 }
