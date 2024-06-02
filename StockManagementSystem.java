@@ -233,8 +233,14 @@ public class StockManagementSystem {
                             System.out.print("Password changed successfully.Do you want to go home page (y/n)? : ");
                             String option = input.next().toLowerCase();
 
+                             System.out.println();
+                            boolean isRun = true;
+
+                           while (isRun) {
                             switch (option) {
                                 case "y":
+                                    isRun = false;
+                                    isCheck = false;
                                     clearConsole();
                                     gotoHomePage(input);
                                     break;
@@ -245,6 +251,8 @@ public class StockManagementSystem {
                                     System.out.print("invalid option. try again! (y/n) : ");
                                     option = input.next().toLowerCase();
                             }
+                           }
+                            
                         } else {
                             System.out.println("incorrect password. try again!");
                             System.out.print("\nEnter your current password : ");
